@@ -65,7 +65,8 @@ In this project cv2.THRESH_BINARY_INV is used
     
  ### Binary threshold inverted
 
-![Binary Inverted](./binary.jpg "threshold function")
+![binary](https://user-images.githubusercontent.com/93030904/208385197-96bb4e66-e4eb-439f-bf25-5008b22704d0.jpg)
+
 
 
 ### Otsu's Binarization
