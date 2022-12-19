@@ -12,13 +12,13 @@ clone the repository into your local system.
 
 
 
-    git clone https://github.com/kumarpriyanshu2k2/Hand_gesture_recoginition_OpenCV.git
+    git clone https://github.com/kumarpriyanshu2k2/hand-gesture-recognition-assignment.git
     
 
 go to the directory in which you have cloned this project.
 
 
-    cd ./Hand_gesture_recoginition_OpenCV
+    cd ./hand-gesture-recognition-assignment
 
 
 
