@@ -27,8 +27,14 @@ then install the required libraries using the following command:
 
     pip install -r requirements.txt
 
+## Steps to get you started
 
-#### Read the working and make the required changes in main.py and create a pull request.
+- Fork the repo
+- clone it on your system
+- create a new brach (git checkout -b assignment_3)
+- make the required changes in the python file (main.py)
+- push your changes on github
+- make a pull request
 
 ## Working behind Hand gesture recogonition:
 
