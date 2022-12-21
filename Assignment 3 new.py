@@ -88,9 +88,9 @@ while True:
         if count_defects == 0:
             cv2.putText(img, "ONE",(50,50), cv2.FONT_HERSHEY_SIMPLEX, 2, 2)
         # elif count_defects == 1:
-        elif count_defects>0:
+        elif count_defects==1:
             count_defects=count_defects+1
-            cv2.putText(img,str(count),(50,50), cv2.FONT_HERSHEY_SIMPLEX, 2, 2)
+            cv2.putText(img,"Two",(50,50), cv2.FONT_HERSHEY_SIMPLEX, 2, 2)
        
         else:
 
