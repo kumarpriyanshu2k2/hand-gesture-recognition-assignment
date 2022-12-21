@@ -94,7 +94,7 @@ while True:
        
         else:
 
-            cv2.putText(img,"Zero",(50,50),cv2.FONT_HERSHEY_SIMPLEX, 2, 2)
+           pass
 
 
     except:
