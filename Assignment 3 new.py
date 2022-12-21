@@ -34,12 +34,13 @@ while True:
     # show threshold
     cv2.imshow("Threshold",thresh)
     
-  
+    contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    
     try:
         # TODO: contour with maximum area
         # contour = your code
         drawing = np.zeros(img.shape, np.uint8)
-        contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
         contour = max(contours, key=lambda x: cv2.contourArea(x))
         cv2.drawContours(drawing, [contour], -1, (0, 255, 0), 0)
         # bounding rectangle for the contour
@@ -48,7 +49,7 @@ while True:
 
         # TODO: create hull
         #hull = your code  (important: do not use returnPoints argument)
-        hull = cv2.Hull(contour)
+        hull = cv2.convexHull(contour)
 
      
         cv2.drawContours(drawing, [contour], -1, (0, 255, 0), 0)
@@ -66,22 +67,22 @@ while True:
         count_defects = 0
         #TODO: refer to the math for calculating the angle part of README
         for i in range(defects.shape[0]):
-         s, e, f, d = defects[i, 0]
-         start = tuple(contour[s][0])
-         end = tuple(contour[e][0])
-         far = tuple(contour[f][0])
+            s, e, f, d = defects[i, 0]
+            start = tuple(contour[s][0])
+            end = tuple(contour[e][0])
+            far = tuple(contour[f][0])
     
    # calculating the angle using cosine formula
    
-         a = math.sqrt((start[0] - end[0]) ** 2 + (start[1] - end[1]) ** 2)
-         b = math.sqrt((-start[0] + far[0]) ** 2 + (-start[1] + far[1]) ** 2)
-         c = math.sqrt((end[0] - far[0]) ** 2 + (end[1] - far[1]) ** 2)
-         angle = (math.acos((b**2 + c**2 - a**2) / (2*b*c)))*57
+            a = math.sqrt((start[0] - end[0]) ** 2 + (start[1] - end[1]) ** 2)
+            b = math.sqrt((-start[0] + far[0]) ** 2 + (-start[1] + far[1]) ** 2)
+            c = math.sqrt((end[0] - far[0]) ** 2 + (end[1] - far[1]) ** 2)
+            angle = (math.acos((b**2 + c**2 - a**2) / (2*b*c)))*57
  
-         if angle <= 90:
-           count_defects += 1
-           cv2.circle(img, far, 1, [0, 0, 255], -1)
-           cv2.line(img, start, end, [0, 255, 0], 2)
+            if angle <= 90:
+                count_defects += 1
+                cv2.circle(img, far, 1, [0, 0, 255], -1)
+            cv2.line(img, start, end, [0, 255, 0], 2)
             
         # output
         # TODO: Complete the logic
