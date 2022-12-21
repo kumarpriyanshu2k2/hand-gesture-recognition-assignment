@@ -14,7 +14,7 @@ while True:
     crop_image= img[100:500,700:1100]
     
     # TODO: Grey Filter (pass crop_image)
-    # grey = your code
+    grey = cv2.cvtColor(crop_image,cv2.COLOR_BGR2GRAY)
     
     
     # TODO: Gaussian Blur to smoothen the image (pass grey)
