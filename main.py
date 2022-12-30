@@ -75,15 +75,15 @@ while True:
         # TODO: Complete the logic
 
         if count_defects == 0:
-            cv2.putText(img, "ONE", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, 2)
+            cv2.putText(img, "1", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, 2)
         elif count_defects == 1:
-            cv2.putText(img, "TWO", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, 2)
+            cv2.putText(img, "2", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, 2)
         elif count_defects == 2:
-            cv2.putText(img, "THREE", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, 2)
+            cv2.putText(img, "3", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, 2)
         elif count_defects == 3:
-            cv2.putText(img, "FOUR", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, 2)
+            cv2.putText(img, "4", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, 2)
         elif count_defects == 4:
-            cv2.putText(img, "FIVE", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, 2)
+            cv2.putText(img, "5", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, 2)
 
         else:
             pass
