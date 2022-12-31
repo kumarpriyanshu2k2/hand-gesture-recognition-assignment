@@ -15,15 +15,15 @@ while True:
     
     # TODO: Grey Filter (pass crop_image)
     # grey = your code
-    
+    grey = cv2.cvtColor(crop_image, cv2.COLOR_BGR2GRAY)
     
     # TODO: Gaussian Blur to smoothen the image (pass grey)
     # blur = your code
-    
+    blur = cv2.GaussianBlur(grey, (5,5), 0)
 
     # TODO: thresholding the image using Binary inversion + OTSU
     # ret,thresh= your code
-    
+    ret,thresh = cv2.threshold(blur, 0, 255, cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
 
     # show threshold
     cv2.imshow("Threshold",thresh)
@@ -32,6 +32,8 @@ while True:
     try:
         # TODO: contour with maximum area
         # contour = your code
+        contour = max(contours, key = lambda x: cv2.contourArea(x))
+
         
         # bounding rectangle for the contour
         x, y, w, h = cv2.boundingRect(contour)
@@ -39,6 +41,7 @@ while True:
 
         # TODO: create hull
         #hull = your code  (important: do not use returnPoints argument)
+        hull = cv2.convexHull(contour, returnPoints = False)
 
 
         drawing = np.zeros(crop_image.shape, np.uint8)
@@ -47,22 +50,48 @@ while True:
 
         #TODO: finding convex hull
         #hull = your code  (important: use returnPoints argument as False)
-        
+        hull = cv2.convexHull(contour, returnPoints = False)
+
         
         # TODO: finding convexity defects
         # defects = your code
-        
+        defects = cv2.convexityDefects(contour, hull)
+
         
 
         count_defects = 0
+        cv2.drawContours(thresh, contours, -1, (0, 255, 0), 3)
+
         #TODO: refer to the math for calculating the angle part of README
-        
+        for i in range(defects.shape[0]):
+            s,e,f,d = defects[i,0]
+            start = tuple(contour[s][0])
+            end = tuple(contour[e][0])
+            far = tuple(contour[f][0])
+            a = math.sqrt((end[0] - start[0]) ** 2 + (end[1] - start[1]) ** 2)
+            b = math.sqrt((far[0] - start[0]) ** 2 + (far[1] - start[1]) ** 2)
+            c = math.sqrt((end[0] - far[0]) ** 2 + (end[1] - far[1]) ** 2)
+            angle = math.acos((b ** 2 + c ** 2 - a ** 2) / (2 * b * c)) * 57
+
+        if angle <= 90:
+            count_defects += 1
+            cv2.circle(crop_image, far, 1, [0, 0, 255], -1)
+        # dist = cv2.pointPolygonTest(contour,far,True)
+        cv2.line(crop_image, start, end, [0, 255, 0], 2)
             
         # output
         # TODO: Complete the logic
         if count_defects == 0:
             cv2.putText(img, "ONE",(50,50), cv2.FONT_HERSHEY_SIMPLEX, 2, 2)
         # elif count_defects == 1:
+        elif count_defects == 1:
+            cv2.putText(img, "TWO", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, 2)
+        elif count_defects == 2:
+            cv2.putText(img, "THREE", (5, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, 2)
+        elif count_defects == 3:
+            cv2.putText(img, "FOUR", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, 2)
+        elif count_defects == 4:
+            cv2.putText(img, "FIVE", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, 2)
             
 
         else:
